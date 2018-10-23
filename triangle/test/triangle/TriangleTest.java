@@ -36,7 +36,7 @@ public class TriangleTest {
     }
     
     @Test
-    public void test_state_invalid(){
+    public void test_cond_invalid(){
     	int a = 0;
     	int b = 0;
     	int c = 0; 
@@ -53,25 +53,18 @@ public class TriangleTest {
     	actual = Triangle.classify(a,b,c);
     	assertEquals(actual,expected);
     	
-    	c = 200;
-    	
-    	actual = Triangle.classify(a,b,c);
-    	
-    	assertEquals(actual,expected);
-    	
     }
     
     @Test
-    public void test_state_scalene() {
+    public void test_cond_scalene() {
     	Type actual = Triangle.classify(3,5,6);
     	Type expected = SCALENE;
     	
     	assertEquals(actual,expected);
     	
+    	
     }
     
-    
-    @Test
     public void test_condition() {
         Type expected;
         Type actual;
@@ -103,14 +96,25 @@ public class TriangleTest {
         actual = Triangle.classify(3, 1 ,2);
         assertEquals(actual, expected);
         
-        //train = 1
+        //'true' for all conditionals in line 43
+        expected = ISOSCELES;
+        actual = Triangle.classify(2, 2, 1);
+        assertEquals(actual, expected);
         
+        //'true' for all conditionals in line 45 (and false for first condition of 43)
+        expected = ISOSCELES;
+        actual = Triangle.classify(2, 1, 2);
+        assertEquals(actual, expected);
         
-        //train = 2
+        //'true' for all conditionals in line 47
+        expected = ISOSCELES;
+        actual = Triangle.classify(1, 2, 2);
+        assertEquals(actual, expected);
         
-        
-        //train = 3
-    	
+        //'false' for all conditionals in line 43, 45, and 47 (except first condition of 43)
+        expected = INVALID;
+        actual = Triangle.classify(Integer.MAX_VALUE, Integer.MIN_VALUE, 10);
+        assertEquals(actual, expected);
     }
     
     public void test_mutation() {
