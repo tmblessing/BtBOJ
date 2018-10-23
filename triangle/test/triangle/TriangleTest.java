@@ -17,4 +17,17 @@ public class TriangleTest {
         Type expected = EQUILATERAL;
         assertEquals(actual, expected);
     }
+    
+    public void test_statement() {
+    	
+    }
+    
+    public void test_condition() {
+    	
+    }
+    
+    public void test_mutation() {
+    	
+    }
+    
 }
