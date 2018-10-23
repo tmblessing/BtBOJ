@@ -53,6 +53,12 @@ public class TriangleTest {
     	actual = Triangle.classify(a,b,c);
     	assertEquals(actual,expected);
     	
+    	c = 200;
+    	
+    	actual = Triangle.classify(a,b,c);
+    	
+    	assertEquals(actual,expected);
+    	
     }
     
     @Test
