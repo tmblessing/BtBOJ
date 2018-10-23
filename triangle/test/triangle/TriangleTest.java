@@ -36,7 +36,7 @@ public class TriangleTest {
     }
     
     @Test
-    public void test_cond_invalid(){
+    public void test_state_invalid(){
     	int a = 0;
     	int b = 0;
     	int c = 0; 
@@ -62,15 +62,16 @@ public class TriangleTest {
     }
     
     @Test
-    public void test_cond_scalene() {
+    public void test_state_scalene() {
     	Type actual = Triangle.classify(3,5,6);
     	Type expected = SCALENE;
     	
     	assertEquals(actual,expected);
     	
-    	
     }
     
+    
+    @Test
     public void test_condition() {
         Type expected;
         Type actual;
