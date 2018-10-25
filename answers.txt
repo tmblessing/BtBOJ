@@ -3,3 +3,111 @@ Lingqui Meng
 Shipeng Yu
 Ruifeng zhang
 Thomas Blessing
+
+Question 1: The do differ. For the coverage-adequate tests suites, you write the entire test suite in one go, by analyzing the code, creating a decision tree with every decision or conditional, determining the inputs that will give you 100%, and then coding those into a test. For mutation-adequate test suite, you find a live mutant, and write test case to kill it, in this process, the mutants cover rate increase until 100%, and mutant killed rate close to 100%.
+
+Question 2: Our coverage-adequate test suits do not detect all detectable mutants. Mutated code could cause these tests to fail. They were written with the statements and conditions contained in the code in mind. If these conditionals were changed in a mutation, it would likely reduce the coverage of the test suit. However, depending on the mutation, it is possible that the test suit could still achieve 100% coverage.
+
+Questions 3. some mutants are not detectable because even the code mutate, it still get same results, therefore, those mutant cannot be killed by test cases.
+
+Question 4:
+    // mutation 11, have the result of Type.INVALID,
+    //even though true, true, false can break the first if loop
+
+    // $ ./show_mutant.sh 11
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/11/triangle/Triangle.java  2018-10-23 10:13:44.368538900 -0400
+    // @@ -20 +20 @@
+    // -        if (a <= 0 || b <= 0 || c <= 0) {
+    // +        if (a <= 0 != b <= 0 || c <= 0) {
+
+
+
+    //for mutation 59, it won't be able to fail, since
+    //trian won't be able to be negative
+
+    // $ ./show_mutant.sh 59
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/59/triangle/Triangle.java  2018-10-23 10:13:44.647443200 -0400
+    // @@ -33 +33 @@
+    // -        if (trian == 0) {
+    // +        if (trian <= 0) {
+
+
+    //for mutation 76, the only way to break this is true, true, false, BUT
+    //a + b <= c and a + c <= b cannot happen at the same time, and a>0,b>0,c>0, then 
+    //it won't be fail
+    // $ ./show_mutant.sh 76
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/76/triangle/Triangle.java  2018-10-23 10:13:44.707887300 -0400
+    // @@ -34 +34 @@
+    // -            if (a + b <= c || a + c <= b || b + c <= a) {
+    // +            if (a + b <= c != a + c <= b || b + c <= a) {
+
+    //for mutation 87, it won't be able to let a+c<=b and b+c<=a at the same time,
+    //since the values are positive, and only true and true condition can result two different results 
+    // $ ./show_mutant.sh 87
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/87/triangle/Triangle.java  2018-10-23 10:13:44.747528900 -0400
+    // @@ -34 +34 @@
+    // -            if (a + b <= c || a + c <= b || b + c <= a) {
+    // +            if ((a + b <= c || a + c <= b) != b + c <= a) {
+
+
+
+    //for mutation 101, since the value of trian cannot be less than 1, since
+    //all have been detected
+    // $ ./show_mutant.sh 101
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/101/triangle/Triangle.java 2018-10-23 10:13:44.327467100 -0400
+    // @@ -43 +43 @@
+    // -        if (trian == 1 && a + b > c) {
+    // +        if (trian <= 1 && a + b > c) {
+
+
+    //for mutation 111, the only way to get different result is to have false, false condiction,
+    //since all values are not negative, then it won't be able to fail
+    // $ ./show_mutant.sh 111
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/111/triangle/Triangle.java 2018-10-23 10:13:44.376895200 -0400
+    // @@ -43 +43 @@
+    // -        if (trian == 1 && a + b > c) {
+    // +        if (trian == 1 == a + b > c) {
+
+
+    // for mutation 128, the only way to get different result is to have false, false condiction,
+    //since all values are not negative, then it won't be able to fail
+    // $ ./show_mutant.sh 128
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/128/triangle/Triangle.java 2018-10-23 10:13:44.441360600 -0400
+    // @@ -45 +45 @@
+    // -        } else if (trian == 2 && a + c > b) {
+    // +        } else if (trian == 2 == a + c > b) {
+
+
+    //for mutation 136, since the value of trian cannot be greater than 3, since
+    //all have been detected
+    // $ ./show_mutant.sh 136
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/136/triangle/Triangle.java 2018-10-23 10:13:44.460463000 -0400
+    // @@ -47 +47 @@
+    // -        } else if (trian == 3 && b + c > a) {
+    // +        } else if (trian >= 3 && b + c > a) {
+
+
+    // for mutation 145, the only way to get different result is to have false, false condiction,
+    //since all values are not negative, then it won't be able to fail
+    // $ ./show_mutant.sh 145
+    // --- src/triangle/Triangle.java  2018-10-23 10:13:45.058122400 -0400
+    // +++ .mutated/mutants/145/triangle/Triangle.java 2018-10-23 10:13:44.487581200 -0400
+    // @@ -47 +47 @@
+    // -        } else if (trian == 3 && b + c > a) {
+    // +        } else if (trian == 3 == b + c > a) {
+
+
+
+Question5: for mutant detection rates, when you are deleting all the assertions, the mutants covered rate won't change, it still remains, but mutants score become 0, and killed number become 0.
+
+question 6:
+Base on mutations analysis and test case redundancy, the test cases repeatedly testing some mutation. In other words, many test cases are able to kill same mutants. There are some test cases in my test suites are redundant. the methods to delete those redundant test cases only save the test cases that can kill unique mutants, remove all the repeat test cases.
+For example: If test 1 can kill mutant 1, 2, 3. Test 2 can kill mutant 2, 3, 4. Test 3 can kill mutant 4, 5, 6. In this case, we can simply remove test 2, because other tests can do same thing. 
