@@ -103,13 +103,25 @@ public class TriangleTest {
         actual = Triangle.classify(3, 1 ,2);
         assertEquals(actual, expected);
         
-        //train = 1
+         //'true' for both conditionals in line 43
+        expected = ISOSCELES;
+        actual = Triangle.classify(2, 2, 1);
+        assertEquals(actual, expected);
         
+        //'true' for both conditionals in line 45 (and false for first condition of 43)
+        expected = ISOSCELES;
+        actual = Triangle.classify(2, 1, 2);
+        assertEquals(actual, expected);
         
-        //train = 2
-        
-        
-        //train = 3
+        //'true' for both conditionals in line 47
+        expected = ISOSCELES;
+        actual = Triangle.classify(1, 2, 2);
+        assertEquals(actual, expected);
+    	
+        //'false' for all conditionals in line 43, 45, and 47 (except first condition of 43)
+        expected = INVALID;
+        actual = Triangle.classify(Integer.MAX_VALUE, Integer.MIN_VALUE, 10);
+        assertEquals(actual, expected);
     	
     }
     
