@@ -11,6 +11,8 @@ import static triangle.Triangle.Type.*;
  */
 public class TriangleTest {
 
+	
+	//Coverage Tests
     @Test
     public void test1() {
         Type actual = Triangle.classify(10, 10, 10);
@@ -125,7 +127,7 @@ public class TriangleTest {
     	
     }
     
-    public class TriangleTestMutant() {
+    public class TriangleTestMutant {
 
         @Test
         //5,10,14,19,23,41,44,45,49,50,51,52,54,55,56,60,97,98
@@ -503,4 +505,5 @@ public class TriangleTest {
         // +        } else if (trian == 3 == b + c > a) {
 
     
+    }
 }
